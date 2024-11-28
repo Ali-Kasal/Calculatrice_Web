@@ -16,3 +16,18 @@ function calculateResult() {
         display.value = 'Erreur';
     }
 }
+
+function deleteLastCharacter() {
+    const display = document.getElementById('display');
+    display.value = display.value.slice(0, -1);
+}
+
+function changeSign() {
+    const display = document.getElementById('display');
+    display.value = -display.value;
+}
+
+function squareRoot() {
+    const display = document.getElementById('display');
+    display.value = Math.sqrt(display.value);
+}
