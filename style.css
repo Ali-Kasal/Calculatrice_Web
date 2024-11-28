@@ -39,9 +39,10 @@ button {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #007BFF; /* Couleur de fond des boutons */
-    color: white; /* Cou
+    background-color: #691212; /* Couleur de fond des boutons */
+    color: white; 
     }
+
 
 button:hover {
     background-color: #0056b3; /* Couleur de fond au survol */
