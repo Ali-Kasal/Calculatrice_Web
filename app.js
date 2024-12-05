@@ -91,6 +91,19 @@ function square() {
     }
 }
 
+//Fonction pour calculer un exposant
+function exponent() {
+    const display = document.getElementById('display');
+    try {
+        const value = parseFloat(display.value);
+        if (isNaN(value)) throw new Error('Valeur invalide');
+        display.value = Math.pow(value, 3);
+        addToHistory(`${value}^3`, display.value);
+    } catch {
+        display.value = 'Erreur';
+    }
+}
+
 // Événements clavier
 document.addEventListener('keydown', function (event) {
     const key = event.key;
