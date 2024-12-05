@@ -104,6 +104,33 @@ function exponent() {
     }
 }
 
+
+// Fonction pour calculer un exposant quelconque
+function calculateExponent() {
+    const display = document.getElementById('display');
+
+    try {
+        // Séparer la base et l'exposant avec un symbole personnalisé (^)
+        const [base, exponent] = display.value.split('^').map(parseFloat);
+
+        // Vérification des valeurs
+        if (isNaN(base) || isNaN(exponent)) {
+            throw new Error('Valeurs invalides');
+        }
+
+        // Calcul de l'exposant
+        const result = Math.pow(base, exponent);
+
+        // Mise à jour de l'écran et ajout à l'historique
+        display.value = result;
+        addToHistory(`${base}^${exponent}`, result);
+    } catch (error) {
+        display.value = 'Erreur';
+        console.error('Erreur lors du calcul de l\'exposant :', error.message);
+    }
+}
+
+
 // Événements clavier
 document.addEventListener('keydown', function (event) {
     const key = event.key;
@@ -119,6 +146,13 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
+document.addEventListener('keydown', function (event) {
+    const key = event.key;
+
+    if (key === '^') {
+        appendToDisplay('^');
+    }
+});
 
 
 
