@@ -51,3 +51,23 @@ button:hover {
 button:active {
     background-color: #003f7f; /* Couleur au clic */
 }
+
+
+#history-container {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#history {
+    list-style-type: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+#history li {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
