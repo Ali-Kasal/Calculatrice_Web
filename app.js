@@ -24,13 +24,16 @@ function calculateResult() {
     const expression = display.value;
 
     try {
-        // Validation de l'expression (interdiction des lettres, etc.)
-        if (/[^0-9+\-*/.() ]/.test(expression)) {
+        // Validation de l'expression (autorisation de ^ pour les exposants)
+        if (/[^0-9+\-*/.^() ]/.test(expression)) {
             throw new Error('Expression invalide');
         }
 
+        // Remplacement de ^ par ** pour que JavaScript puisse le traiter
+        const sanitizedExpression = expression.replace(/\^/g, '**');
+
         // Calcul de l'expression
-        const result = eval(expression);
+        const result = eval(sanitizedExpression);
 
         // Mise à jour de l'écran et ajout à l'historique
         display.value = result;
@@ -40,6 +43,7 @@ function calculateResult() {
         console.error('Erreur lors du calcul :', error.message);
     }
 }
+
 
 // Fonction pour ajouter une valeur à l'écran
 function appendToDisplay(value) {
@@ -110,12 +114,27 @@ function calculateExponent() {
     const display = document.getElementById('display');
 
     try {
-        // Séparer la base et l'exposant avec un symbole personnalisé (^)
-        const [base, exponent] = display.value.split('^').map(parseFloat);
+        // Vérifier si l'expression contient bien le symbole '^'
+        if (!display.value.includes('^')) {
+            throw new Error("L'expression ne contient pas d'exposant.");
+        }
+
+        // Séparer la base et l'exposant
+        const parts = display.value.split('^');
+        console.log('Parts après split:', parts);
+
+        // Validation du nombre de parties
+        if (parts.length !== 2) {
+            throw new Error("Expression mal formée. Utilisez 'base^exposant'.");
+        }
+
+        const base = parseFloat(parts[0].trim());
+        const exponent = parseFloat(parts[1].trim());
+        console.log('Base:', base, 'Exposant:', exponent);
 
         // Vérification des valeurs
         if (isNaN(base) || isNaN(exponent)) {
-            throw new Error('Valeurs invalides');
+            throw new Error("Base ou exposant invalide.");
         }
 
         // Calcul de l'exposant
@@ -129,6 +148,8 @@ function calculateExponent() {
         console.error('Erreur lors du calcul de l\'exposant :', error.message);
     }
 }
+
+
 
 
 // Événements clavier
